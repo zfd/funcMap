@@ -59,14 +59,12 @@ func (f FuncMap) Invoke(funcName string, args ...interface{}) (result []interfac
 		if pts, ok := f.funcParamsMap[funcName]; ok {
 			//检查参数长度
 			if len(pts) != len(args) {
-				err = ERROR_CODE_ARGS_NUM //参数数量错误
-				return
+				panic(ERROR_CODE_ARGS_NUM) //参数数量错误
 			}
 			//检查参数类型
 			for index, paramType := range pts {
 				if reflect.TypeOf(args[index]).String() != paramType {
-					err = ERROR_CODE_ARGS_TYPE //参数类型错误
-					return
+					panic(ERROR_CODE_ARGS_TYPE) //参数类型错误
 				}
 			}
 
